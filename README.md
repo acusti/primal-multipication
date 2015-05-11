@@ -1,1 +1,1 @@
-# primal-multipication
+# Primal Multiplication
