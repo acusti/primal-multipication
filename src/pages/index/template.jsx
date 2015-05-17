@@ -1,12 +1,12 @@
 // react
 import React from 'react';
-import Chrome from '../../components/chrome/index.js';
+import Chassis from '../../components/chassis.jsx';
 
 const render = function() {
     return (
-        <Chrome>
-            <h1>I am index page</h1>
-        </Chrome>
+        <Chassis>
+            <h1>Multiplication table of prime numbers</h1>
+        </Chassis>
     );
 };
 

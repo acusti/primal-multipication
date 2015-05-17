@@ -1,12 +1,12 @@
 // react
 import React from 'react';
-import Chrome from '../../components/chrome/index.js';
+import Chassis from '../../components/chassis.jsx';
 
 const render = function() {
     return (
-        <Chrome>
+        <Chassis>
             <h1>I am other page</h1>
-        </Chrome>
+        </Chassis>
     );
 };
 
