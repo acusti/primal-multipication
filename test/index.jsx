@@ -1,4 +1,5 @@
 /* global describe, it */
+/* eslint no-unused-vars: 0 */
 // import helpers
 import should from 'turris-test-helpers';
 
@@ -13,6 +14,6 @@ describe('App suite', function() {
         // render
         App.start();
         // verify it exists
-        should(document.getElementById('mainContainer').children.length).equal(1);
+        document.getElementById('mainContainer').children.length.should.equal(1);
     });
 });
