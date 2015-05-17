@@ -12,6 +12,7 @@
   },
   "rules": {
     "react/jsx-quotes": 1,
-    "quotes": [2, "single"]
+    "quotes": [2, "single"],
+    "comma-dangle": 0
   }
 }
