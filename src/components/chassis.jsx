@@ -3,7 +3,7 @@ import React from 'react';
 import Navigation from './navigation.jsx';
 
 const Chassis = React.createClass({
-    render: function() {
+    render : function() {
         return (
             <div>
                 <Navigation />

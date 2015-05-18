@@ -3,7 +3,7 @@ import React from 'react';
 import ReactRouter from 'react-router';
 
 const Navigation = React.createClass({
-    render: function() {
+    render : function() {
         return (
             <div className="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div className="container">
