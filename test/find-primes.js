@@ -7,7 +7,7 @@ describe('Find primes', function() {
 		findPrimes(5).length.should.equal(5);
 	});
 	it('Returns the 1st 10 primes correctly', function() {
-		const tenPrimes = [1, 2, 3, 5, 7, 11, 13, 17, 19, 23];
+		const tenPrimes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 		findPrimes(10).should.eql(tenPrimes);
 
 	});
