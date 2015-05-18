@@ -5,6 +5,7 @@ import should from 'turris-test-helpers';
 import App from '../src/app.jsx';
 
 // Import other tests
+import './number-iterator.js';
 import './find-primes.js';
 
 describe('App suite', function() {
