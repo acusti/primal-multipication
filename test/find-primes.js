@@ -1,6 +1,18 @@
 import should from 'turris-test-helpers';
 
-import findPrimes from '../src/helpers/find-primes.js';
+import findPrimes, {isPrime} from '../src/helpers/find-primes.js';
+
+describe('isPrime', function() {
+	it('Returns a boolean indicating whether the parameter is prime or not', function() {
+		isPrime(1).should.be.false;
+		isPrime(2).should.be.true;
+		isPrime(3).should.be.true;
+		isPrime(5).should.be.true;
+		isPrime(6).should.be.false;
+		isPrime(7).should.be.true;
+		isPrime(997).should.be.true;
+	});
+});
 
 describe('Find primes', function() {
 	it('Returns an array of numbers equal in length to the parameter passed in', function() {
