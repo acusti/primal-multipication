@@ -1,13 +1,11 @@
-/* global describe, it */
-/* eslint no-unused-vars: 0 */
-// import helpers
+// Import helpers
 import should from 'turris-test-helpers';
 
-// import app
+// Import app
 import App from '../src/app.jsx';
 
 describe('App suite', function() {
-    it('Should render', function() {
+    it('Renders the main app container', function() {
         // const React = this.React;
         // const TestUtils = this.TestUtils;
 
@@ -15,5 +13,14 @@ describe('App suite', function() {
         App.start();
         // verify it exists
         document.getElementById('mainContainer').children.length.should.equal(1);
+    });
+
+    it('Defaults to printing multiplication table for the first 10 primes', function() {
+        App.start();
+
+        const multiplicationTable = document.querySelector('.multiplication-table');
+        should.exist(multiplicationTable);
+        multiplicationTable.querySelectorAll('tbody > tr').length.should.equal(10);
+        multiplicationTable.querySelector('tr').querySelectorAll('td').should.equal(10);
     });
 });
