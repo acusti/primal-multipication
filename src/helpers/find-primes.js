@@ -1,9 +1,23 @@
 import numbers from './number-iterator.js';
 
-function findPrimes(total) {
-	const primes = [ ...numbers(total) ].map((number) => {
-		// Logic for finding next prime goes here
-		return number * 2;
+// TODO cache list of primes as they are found
+// let cachedPrimes = [];
+
+function findPrimes(length) {
+	let start;
+	let primes = [ ...numbers({ length }) ].map(() => {
+		if (start === undefined) {
+			// Initialize start at 3 (next pass)
+			start = 3;
+			// Initialize primes at 2
+			return 2;
+		}
+		let prime = start;
+		while (!isPrime(prime)) {
+			prime += 2;
+		}
+		start = prime + 2;
+		return prime;
 	});
 	return primes;
 }
