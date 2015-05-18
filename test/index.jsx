@@ -4,6 +4,9 @@ import should from 'turris-test-helpers';
 // Import app
 import App from '../src/app.jsx';
 
+// Import other tests
+import './find-primes.js';
+
 describe('App suite', function() {
     it('Renders the main app container', function() {
         // const React = this.React;
