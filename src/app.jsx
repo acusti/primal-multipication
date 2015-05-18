@@ -1,9 +1,11 @@
-// react
+// Core JS Array.from polyfill
+import 'core-js/fn/array/from';
+// React
 import React from 'react';
 import ReactRouter from 'react-router';
-// app core
+// App core
 import App from './app/index.js';
-// user routes
+// User routes
 import routes from './routes.js';
 
 const appInstance = (
