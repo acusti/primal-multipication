@@ -3,7 +3,7 @@ import numbers from './number-iterator.js';
 // TODO cache list of primes as they are found
 // let cachedPrimes = [];
 
-function findPrimes(length) {
+function findPrimes(length, isSingle = false) {
 	let start;
 	let primes = [ ...numbers({ length }) ].map(() => {
 		if (start === undefined) {
@@ -19,7 +19,7 @@ function findPrimes(length) {
 		start = prime + 2;
 		return prime;
 	});
-	return primes;
+	return isSingle ? primes[primes.length - 1] : primes;
 }
 
 export function isPrime(number) {
