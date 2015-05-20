@@ -1,34 +1,47 @@
 import React from 'react';
 import findPrimes from '../helpers/find-primes.js';
 
-		const primes = findPrimes(this.state.totalPrimes);
-		const tableRows = primes.map((prime1) => {
-			const tableCells = primes.map((prime2) => {
-				const product = prime1 * prime2;
 class MultiplicationTable extends React.Component {
+    constructor(props) {
+        super(props);
+        let primesLength = 10;
+        let primes = findPrimes(primesLength);
+        this.state = {
+            primesLength,
+            primes
+        };
+    }
+
     render() {
+        const tableRows = this.state.primes.map((prime1) => {
+			const tableCells = this.state.primes.map((prime2) => {
+                const key = `td${prime1}_${prime2}`;
 				return (
-					<td>{product}</td>
+					<td key={key}>{prime1 * prime2}</td>
 				);
 			});
+            const trKey = `tr${prime1}`;
+            const thKey = `th${prime1}`;
 			return (
-				<tr>
-					<th>{prime2}</th>
+				<tr key={trKey}>
+					<th key={thKey}>{prime1}</th>
 					{tableCells}
 				</tr>
 			);
 		});
         return (
-            <table class="multiplication-table">
+            <table className="table multiplication-table">
 				<thead>
 					<tr>
-						{primes.map((prime) => {
-							return <th>{prime}</th>;
+                        <th></th>
+						{this.state.primes.map((prime) => {
+                            const key = `thead${prime}`;
+							return <th key={key}>{prime}</th>;
 						})}
 					</tr>
 				</thead>
 				<tbody>
-                	{tableRows}
+                    {tableRows}
 				</tbody>
             </table>
         );
