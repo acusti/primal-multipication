@@ -1,20 +1,13 @@
 import React from 'react';
-import findPrimes from '../helpers/find-primes.js';
 
 class MultiplicationTable extends React.Component {
     constructor(props) {
         super(props);
-        let primesLength = 10;
-        let primes = findPrimes(primesLength);
-        this.state = {
-            primesLength,
-            primes
-        };
     }
 
     render() {
-        const tableRows = this.state.primes.map((prime1) => {
-			const tableCells = this.state.primes.map((prime2) => {
+        const tableRows = this.props.primes.map((prime1) => {
+			const tableCells = this.props.primes.map((prime2) => {
                 const key = `td${prime1}_${prime2}`;
 				return (
 					<td key={key}>{prime1 * prime2}</td>
@@ -34,7 +27,7 @@ class MultiplicationTable extends React.Component {
 				<thead>
 					<tr>
                         <th></th>
-						{this.state.primes.map((prime) => {
+						{this.props.primes.map((prime) => {
                             const key = `thead${prime}`;
 							return <th key={key}>{prime}</th>;
 						})}

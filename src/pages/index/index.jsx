@@ -1,7 +1,7 @@
 import React from 'react';
 import {DefaultRoute} from 'react-router';
 import Chassis from '../../components/Chassis.jsx';
-import MultiplicationTable from '../../components/MultiplicationTable.jsx';
+import PrimalMultiplication from '../../components/PrimalMultiplication.jsx';
 
 class IndexPage extends React.Component {
     constructor() {
@@ -16,7 +16,7 @@ class IndexPage extends React.Component {
         return (
             <Chassis>
                 <h1>Multiplication table of prime numbers</h1>
-                <MultiplicationTable />
+                <PrimalMultiplication />
             </Chassis>
         );
     }
