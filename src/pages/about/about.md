@@ -9,5 +9,5 @@ A playground for experimenting with:
 	4. Classes and inheritance
 	5. Block-scoped `let` and immutable `const`
 	5. Etc.
-2. ES6-ified React via react-babel
+2. ES6-ified React via Babel
 3. Webpack as module (and asset) loader and builder

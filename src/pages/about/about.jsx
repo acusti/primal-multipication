@@ -8,7 +8,7 @@ class OtherPage extends React.Component {
     render() {
         return (
             <Chassis>
-                <ReactMarkdown source={pageContent} />
+                <ReactMarkdown source={pageContent} skipHtml={true} />
             </Chassis>
         );
     }
