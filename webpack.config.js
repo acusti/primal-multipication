@@ -4,6 +4,9 @@ module.exports = {
     devtool: 'inline-source-map',
     debug: true,
     context: path.resolve(__dirname),
+    eslint: {
+        configFile: './.eslintrc',
+    },
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),

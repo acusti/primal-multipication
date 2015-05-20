@@ -7,6 +7,9 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'app.min.js',
     },
+    eslint: {
+        configFile: './.eslintrc',
+    },
     resolve: {
         root: path.resolve(__dirname),
     },
