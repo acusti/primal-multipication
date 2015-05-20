@@ -6,8 +6,8 @@ class PrimalMultiplication extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-			primesLength: 10,
-			primes: findPrimes(10)
+			primesLength: props.initialPrimesLength,
+			primes: findPrimes(props.initialPrimesLength)
 		};
     }
 
@@ -19,5 +19,9 @@ class PrimalMultiplication extends React.Component {
 		);
 	}
 }
+
+PrimalMultiplication.defaultProps = {
+	initialPrimesLength: 10
+};
 
 export default PrimalMultiplication;
