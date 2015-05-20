@@ -1,0 +1,19 @@
+@import "../_base.less";
+
+.parameters {
+    margin: 1em 0;
+    label {
+        font-weight: 300;
+        font-size: @font-size-h4;
+    }
+    input {
+        width: 100px;
+        padding: 2px 6px;
+        margin-left: 6px;
+        border: 1px solid @gray-lighter;
+        &:active {
+            border-color: @component-active-bg;
+            box-shadow: 0 0 6px @component-active-bg;
+        }
+    }
+}
