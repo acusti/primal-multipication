@@ -3,12 +3,24 @@ import React from 'react';
 import ReactRouter from 'react-router';
 
 class Navigation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            navCollapse: 'collapse'
+        };
+    }
+
+    toggleCollapse() {
+        const navCollapse = this.state.navCollapse ? '' : 'collapse';
+        this.setState({ navCollapse });
+    }
+
     render() {
         return (
             <div className="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div className="container">
                     <div className="navbar-header">
-                        <button type="button" className="navbar-toggle">
+                        <button type="button" className="navbar-toggle" onClick={this.toggleCollapse.bind(this)}>
                             <span className="sr-only">Menu</span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
@@ -17,7 +29,7 @@ class Navigation extends React.Component {
                         <ReactRouter.Link to="/" className="navbar-brand">Primal Multiplication</ReactRouter.Link>
                     </div>
 
-                    <div className="collapse navbar-collapse">
+                    <div className={this.state.navCollapse + ' navbar-collapse'}>
                         <ul className="nav navbar-nav">
                             <li><ReactRouter.Link to="/">Home</ReactRouter.Link></li>
                             <li><ReactRouter.Link to="/about">About</ReactRouter.Link></li>
