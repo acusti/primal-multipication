@@ -1,6 +1,6 @@
 // import all routes
-import Index from './pages/index/index.js';
 import Other from './pages/other/index.js';
+import Index from './pages/index/index.jsx';
 
 // create route array
 let routes = [
