@@ -1,8 +1,13 @@
+/* global __WEBPACK__ */
 import React from 'react';
 import {Route} from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import Chassis from '../../components/Chassis.jsx';
-import pageContent from 'raw!./about.md';
+
+let pageContent = '';
+if (__WEBPACK__) {
+    pageContent = require('raw!./about.md');
+}
 
 class OtherPage extends React.Component {
     render() {

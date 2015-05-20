@@ -1,6 +1,9 @@
+/* global __WEBPACK__ */
 import React from 'react';
 import NumberEditor from 'react-number-editor';
-import '../../style/components/Parameters.less';
+if (__WEBPACK__) {
+    require('../../style/components/Parameters.less');
+}
 
 class Parameters extends React.Component {
     render() {
