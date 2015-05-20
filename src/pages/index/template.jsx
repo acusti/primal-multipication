@@ -1,6 +1,6 @@
 // react
 import React from 'react';
-import Chassis from '../../components/chassis.jsx';
+import Chassis from '../../components/Chassis.jsx';
 
 const render = function() {
     return (

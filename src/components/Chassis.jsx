@@ -1,6 +1,7 @@
 // react
 import React from 'react';
-import Navigation from './navigation.jsx';
+import Navigation from './Navigation.jsx';
+import MultiplicationTable from './MultiplicationTable.jsx';
 
 class Chassis extends React.Component {
     render() {
@@ -11,6 +12,7 @@ class Chassis extends React.Component {
                 <div className="container">
                     <div className="row">
                         {this.props.children}
+                        <MultiplicationTable />
                     </div>
                 </div>
             </div>
