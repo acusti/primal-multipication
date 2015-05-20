@@ -20,7 +20,7 @@ class Navigation extends React.Component {
                     <div className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
                             <li><ReactRouter.Link to="/">Home</ReactRouter.Link></li>
-                            <li><ReactRouter.Link to="/other">Other</ReactRouter.Link></li>
+                            <li><ReactRouter.Link to="/about">About</ReactRouter.Link></li>
                         </ul>
                     </div>
                 </div>

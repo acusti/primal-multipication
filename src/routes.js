@@ -1,11 +1,11 @@
 // import all routes
-import Other from './pages/other/index.js';
 import Index from './pages/index/index.jsx';
+import About from './pages/about/about.jsx';
 
 // create route array
 let routes = [
     Index,
-    Other,
+    About,
 ];
 
 export default routes;
