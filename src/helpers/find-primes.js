@@ -4,56 +4,60 @@ import numbers from './number-iterator.js';
 // let cachedPrimes = [];
 
 function findPrimes(length, isSingle = false) {
-	const increment = 6;
-	let current = 0;
-	let isNMinusOne = false;
-	let primes = [ ...numbers({ length }) ].map(() => {
-		// Exceptions for 2 and 3
-		if (current < increment) {
-			if (!current) {
-				// Increment current to make it not falsy
-				current++;
-				// First prime is 2
-				return 2;
-			}
-			// Kick off proper counting at 6
-			current = increment;
-			// Next prime is 3
-			return 3;
-		}
-		let multiple = current;
-		let prime    = getPrimes(multiple);
-		while (!prime) {
-			multiple += increment;
-			prime = getPrimes(multiple);
-		}
-		current = multiple;
-		// If we are ready to check the next multiple of 6
-		if (!isNMinusOne) {
-			current += increment;
-		}
-		return prime;
-	});
-
-	function getPrimes(multiple) {
-		let prime = false;
-		if (!isNMinusOne) {
-			isNMinusOne = true;
-			if (isPrime(multiple - 1)) {
-				return multiple - 1;
-			}
-		}
-		// Either 6n - 1 just got checked, or it was checked in a previous pass
-		if (isNMinusOne) {
-			isNMinusOne = false;
-			if (isPrime(multiple + 1)) {
-				return multiple + 1;
-			}
-		}
-		return prime;
-	}
-
+	let primes = [ ...primeIterator({ length }) ];
 	return isSingle ? primes[primes.length - 1] : primes;
+}
+
+// Symbol.iterator for generating primes based on 6n +/- 1 factorization
+function primeIterator({ length }) {
+	if (length === undefined) {
+		length = 10;
+	}
+	const multiple   = 6;
+	// Increment from 6n - 1 to 6n + 1
+	const increment1 = 2;
+	// Increment from 6n + 1 to 6(n+1) - 1
+	const increment2 = multiple - 2;
+	return {
+		[Symbol.iterator] : function() {
+			// Initialize our variables
+			let count            = 0;
+			let candidate        = multiple - 1;
+			let isFirstIncrement = true;
+			let prime;
+
+			return {
+				next : function() {
+					let result = {
+						done : false
+					};
+					if (prime === undefined) {
+						prime = 2;
+					} else if (prime === 2) {
+						prime = 3;
+					} else {
+						let foundPrime = false;
+						do {
+							foundPrime = isPrime(candidate);
+							if (foundPrime) {
+								prime = candidate;
+							}
+							// Increment for next iteration
+							candidate += isFirstIncrement ? increment1 : increment2;
+							isFirstIncrement = !isFirstIncrement;
+						} while (!foundPrime);
+					}
+					if (count < length) {
+						result.value = prime;
+					} else {
+						result.done = true;
+					}
+					count++;
+					return result;
+				}
+			};
+		}
+	};
 }
 
 export function isPrime(number) {
