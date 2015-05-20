@@ -2,8 +2,8 @@
 import React from 'react';
 import ReactRouter from 'react-router';
 
-const Navigation = React.createClass({
-    render : function() {
+class Navigation extends React.Component {
+    render() {
         return (
             <div className="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div className="container">
@@ -26,7 +26,7 @@ const Navigation = React.createClass({
                 </div>
             </div>
         );
-    },
-});
+    }
+}
 
 export default Navigation;

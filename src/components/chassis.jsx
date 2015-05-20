@@ -2,8 +2,8 @@
 import React from 'react';
 import Navigation from './navigation.jsx';
 
-const Chassis = React.createClass({
-    render : function() {
+class Chassis extends React.Component {
+    render() {
         return (
             <div>
                 <Navigation />
@@ -15,7 +15,7 @@ const Chassis = React.createClass({
                 </div>
             </div>
         );
-    },
-});
+    }
+}
 
 export default Chassis;
