@@ -13,18 +13,21 @@ describe('App suite', function() {
         // const React = this.React;
         // const TestUtils = this.TestUtils;
 
-        // render
+        // Render
         App.start();
-        // verify it exists
+        // Verify it exists
         document.getElementById('mainContainer').children.length.should.equal(1);
     });
 
-    it('Defaults to printing multiplication table for the first 10 primes', function() {
+    it('Defaults to printing multiplication table for the first 10 primes with vertical and horizontal headings', function() {
         App.start();
 
         const multiplicationTable = document.querySelector('.multiplication-table');
         should.exist(multiplicationTable);
         multiplicationTable.querySelectorAll('tbody > tr').length.should.equal(10);
-        multiplicationTable.querySelector('tr').querySelectorAll('td').should.equal(10);
+        multiplicationTable.querySelector('tbody > tr').querySelectorAll('td').length.should.equal(10);
+        // Check for headings: should have thead, and length should be 11 (includes vertical table headings)
+        multiplicationTable.querySelectorAll('thead th').length.should.equal(11);
+        multiplicationTable.querySelector('tbody > tr > :first-child').nodeName.toLowerCase().should.equal('th');
     });
 });
