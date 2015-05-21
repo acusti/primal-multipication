@@ -1,6 +1,7 @@
 // react
 import React from 'react';
 import ReactRouter from 'react-router';
+import basePath from '../helpers/base-path.js';
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -26,13 +27,13 @@ class Navigation extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <ReactRouter.Link to="/" className="navbar-brand">Primal Multiplication</ReactRouter.Link>
+                        <ReactRouter.Link to={basePath} className="navbar-brand">Primal Multiplication</ReactRouter.Link>
                     </div>
 
                     <div className={this.state.navCollapse + ' navbar-collapse'}>
                         <ul className="nav navbar-nav">
-                            <li><ReactRouter.Link to="/">Home</ReactRouter.Link></li>
-                            <li><ReactRouter.Link to="/about">About</ReactRouter.Link></li>
+                            <li><ReactRouter.Link to={basePath}>Home</ReactRouter.Link></li>
+                            <li><ReactRouter.Link to={`${basePath}about`}>About</ReactRouter.Link></li>
                         </ul>
                     </div>
                 </div>

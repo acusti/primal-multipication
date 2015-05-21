@@ -11,11 +11,8 @@ import ReactRouter from 'react-router';
 import App from './app/index.js';
 // User routes
 import routes from './routes.js';
+import basePath from './helpers/base-path.js';
 
-let basePath = '/';
-if (window && window.location.pathname.indexOf('/primal-multiplication') !== -1) {
-    basePath = '/primal-multiplication';
-}
 const appInstance = (
     <ReactRouter.Route name="app" path={basePath} handler={App}>
         {routes}
