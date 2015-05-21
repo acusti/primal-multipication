@@ -8,7 +8,7 @@ class Chassis extends React.Component {
             <div>
                 <Navigation />
 
-                <div className="container">
+                <div className="container container--primary">
                     <div className="row">
                         {this.props.children}
                     </div>

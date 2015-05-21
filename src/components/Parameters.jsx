@@ -12,6 +12,7 @@ class Parameters extends React.Component {
                 <label>
                     How many primes do you want to show? <NumberEditor min={1} max={100000} step={1} decimals={0} {...this.props} />
                 </label>
+                <span className="glyphicon glyphicon-question-sign" title="Double-click to manually edit the number" style={{marginLeft: '8px'}}></span>
             </div>
         );
     }

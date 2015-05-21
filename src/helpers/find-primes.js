@@ -1,5 +1,3 @@
-import numbers from './number-iterator.js';
-
 // TODO cache list of primes as they are found
 // let cachedPrimes = [];
 
