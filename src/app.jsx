@@ -13,7 +13,7 @@ import App from './app/index.js';
 import routes from './routes.js';
 
 let basePath = '/';
-if (window && window.location.href.pathname.indexOf('/primal-multiplication') !== -1) {
+if (window && window.location.pathname.indexOf('/primal-multiplication') !== -1) {
     basePath = '/primal-multiplication';
 }
 const appInstance = (
