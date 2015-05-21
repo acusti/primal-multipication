@@ -1,5 +1,7 @@
-// Core JS Array.from polyfill
+// Array.from polyfill
 import 'core-js/fn/array/from';
+// Object.assign polyfill
+import 'core-js/es6/object';
 // Symbol polyfill
 import 'core-js/es6/symbol';
 // React

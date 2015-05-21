@@ -1,4 +1,12 @@
+/* global __WEBPACK__ */
 import React from 'react';
+import FixedDataTable from 'fixed-data-table';
+if (__WEBPACK__) {
+    require('../../node_modules/fixed-data-table/dist/fixed-data-table.css');
+}
+
+const Table  = FixedDataTable.Table;
+const Column = FixedDataTable.Column;
 
 class MultiplicationTable extends React.Component {
     constructor(props) {
@@ -6,38 +14,45 @@ class MultiplicationTable extends React.Component {
     }
 
     render() {
-        const tableRows = this.props.primes.map((prime1) => {
-			const tableCells = this.props.primes.map((prime2) => {
-                const key = `td${prime1}_${prime2}`;
-				return (
-					<td key={key}>{prime1 * prime2}</td>
-				);
-			});
-            const trKey = `tr${prime1}`;
-            const thKey = `th${prime1}`;
-			return (
-				<tr key={trKey}>
-					<th key={thKey}>{prime1}</th>
-					{tableCells}
-				</tr>
-			);
-		});
         return (
-            <table className="table multiplication-table">
-				<thead>
-					<tr>
-                        <th></th>
-						{this.props.primes.map((prime) => {
-                            const key = `thead${prime}`;
-							return <th key={key}>{prime}</th>;
-						})}
-					</tr>
-				</thead>
-				<tbody>
-                    {tableRows}
-				</tbody>
-            </table>
+            <Table
+                className="table multiplication-table"
+                rowHeight={35}
+                headerHeight={35}
+                rowGetter={this.rowGetter.bind(this)}
+                rowsCount={this.props.primesLength}
+                width={800}
+                height={600}>
+                    <Column
+                        label=""
+                        width={40}
+                        dataKey={0}
+                        fixed={true} />
+                {this.props.primes.map((prime, idx) => {
+                    return (
+                        <Column
+                            label={prime}
+                            width={50}
+                            dataKey={idx + 1} />
+                    );
+                })}
+            </Table>
         );
+    }
+
+    getTableData() {
+        return this.props.primes.map((prime1) => {
+            return this.props.primes.map((prime2) => {
+                return prime1 * prime2;
+            });
+        });
+    }
+
+    rowGetter(rowIndex) {
+        let prime1 = this.props.primes[rowIndex];
+        return [ prime1, ...this.props.primes.map((prime2) => {
+            return prime1 * prime2;
+        }) ];
     }
 }
 
