@@ -1,6 +1,6 @@
 @import "../_base.less";
 
-.multiplication-table {
+.multiplication-table__outer-container {
     position: relative;
     &.is-scrollable-x {
         overflow-x: scroll;
@@ -8,26 +8,42 @@
 }
 .multiplication-table__container.is-scrollable-y {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
-.multiplication-table table {
-    table-layout: fixed;
-    width: auto;
+.multiplication-table {
+    tbody th:first-child {
+        border-top: 0;
+        border-bottom: 0;
+        border-right: 2px solid @table-border-color;
+    }
+    th,
+    td {
+        text-align: right;
+    }
+    thead,
+    tbody {
+        display: table;
+        table-layout: fixed;
+    }
+    thead {
+        position: absolute;
+        top: 0;
+        background: white;
+        th {
+            &:first-child {
+                margin-bottom: -2px;
+                border-bottom: 2px solid white;
+            }
+        }
+    }
 }
 
-.multiplication-table__thead__label {
-    position: absolute;
-    background: white;
-    height: 37px;
-    width: 60px;
-    padding: 10px 23px 0 17px;
-    border-bottom: 2px solid @table-border-color;
-}
-.multiplication-table__thead__label {
-    margin: -27px 0 0 -21px;
-}
 .multiplication-table__notice {
     display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
     .is-abbreviated & {
         display: block;
+        opacity: 1;
     }
 }
