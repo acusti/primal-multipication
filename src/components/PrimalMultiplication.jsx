@@ -3,6 +3,7 @@ import Parameters from './Parameters.jsx';
 import MultiplicationTable from './MultiplicationTable.jsx';
 import findPrimes from '../helpers/find-primes.js';
 
+let componentOffsetTop;
 class PrimalMultiplication extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ class PrimalMultiplication extends React.Component {
         }
         this._updateParametersTimeout = window.setTimeout(() => {
             this.updateParameters(primesLength);
-        }, 250);
+        }, 50);
     }
 
     updateParameters(primesLength) {
@@ -51,7 +52,7 @@ class PrimalMultiplication extends React.Component {
     }
 
     readComponentDimensions(forceUpdate = false) {
-        this._offsetTop = React.findDOMNode(this).offsetTop;
+        componentOffsetTop = React.findDOMNode(this).offsetTop;
         if (forceUpdate) {
             let tableProps       = this.state.tableProps;
             tableProps.maxWidth  = this.calculateChildDimensions('width');
@@ -66,7 +67,7 @@ class PrimalMultiplication extends React.Component {
             const container = document.querySelector('.container--primary');
             calculated = container ? container.clientWidth : document.body.clientWidth;
         } else {
-            calculated = window.innerHeight - (this._offsetTop || 123) - 50;
+            calculated = window.innerHeight - (componentOffsetTop || 123) - 125;
         }
         return calculated;
     }

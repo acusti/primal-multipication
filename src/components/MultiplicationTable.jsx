@@ -11,26 +11,13 @@ const dimensions = {
         height: 35
     },
     column: {
-        width: 50
-    },
-    columnKey: {
-        width: 40
+        widthNarrow   : 50,
+        widthMedium   : 70,
+        widthLarge    : 80,
+        widthXXLarge  : 100,
+        widthXXXLarge : 110,
     }
 };
-const tableStyles = {
-    th: {
-        width  : `${dimensions.column.width}px`,
-        height : `${dimensions.row.height}px`
-    },
-    td: {
-        width  : `${dimensions.column.width}px`,
-        height : `${dimensions.row.height}px`
-    },
-    tdKey: {
-        width  : `${dimensions.columnKey.width}px`,
-        height : `${dimensions.row.height}px`
-    },
-}
 
 class MultiplicationTable extends React.Component {
     constructor(props) {
@@ -38,16 +25,40 @@ class MultiplicationTable extends React.Component {
     }
 
     render() {
-        // Destructuring to set up tableProps as not including primes and primesLength
         const isAbbreviated = this.props.primesLength > this.props.maxTableLength;
         let isScrollableX   = false;
         let isScrollableY   = false;
-        const noticeStyle   = {
-            display: isAbbreviated ? 'block' : 'none'
+        let columnWidth     = dimensions.column.widthNarrow;
+        if (this.props.primesLength >= 35000) {
+            columnWidth = dimensions.column.widthXXXLarge;
+        } else if (this.props.primesLength >= 5000) {
+            columnWidth = dimensions.column.widthXXLarge;
+        } else if (this.props.primesLength >= 900) {
+            columnWidth = dimensions.column.widthXLarge;
+        } else if (this.props.primesLength >= 200) {
+            columnWidth = dimensions.column.widthLarge;
+        } else if (this.props.primesLength > 25) {
+            columnWidth = dimensions.column.widthMedium;
+        }
+
+        const tableStyles = {
+            th: {
+                width  : `${columnWidth}px`,
+                height : `${dimensions.row.height}px`
+            },
+            td: {
+                width  : `${columnWidth}px`,
+                height : `${dimensions.row.height}px`
+            },
+            tdKey: {
+                width  : `${columnWidth - 15}px`,
+                height : `${dimensions.row.height}px`
+            },
         };
         const primeOffset = isAbbreviated ? this.props.primesLength - this.props.maxTableLength : 0;
         const tableLength = this.props.primesLength - primeOffset;
-        let outerWidth = dimensions.column.width * tableLength + dimensions.columnKey.width;
+        // Last columnWidth is for columnKey, which is 10px narrower
+        let outerWidth = columnWidth * tableLength + columnWidth - 15;
         let width = outerWidth;
         if (width > this.props.maxWidth) {
             width = this.props.maxWidth;
@@ -74,40 +85,36 @@ class MultiplicationTable extends React.Component {
             const thKey = `th${primeTr}`;
             return (
                 <tr key={trKey}>
-					<th key={thKey} style={tableStyles.th}>
-                        <div className="multiplication-table__tbody__label">
-                            {primeTr}
-                        </div>
+					<th className="multiplication-table__tbody__label" key={thKey} style={tableStyles.tdKey}>
+                        {primeTr}
                     </th>
 					{tableCells}
 				</tr>
             );
         });
         return (
-            <div className={ 'multiplication-table' + (isAbbreviated ? ' is-abbreviated' : '') + (isScrollableX ? ' is-scrollable-x' : '') } style={{ width }}>
+            <div className={ 'multiplication-table' + (isAbbreviated ? ' is-abbreviated' : '') }>
                 <p className="multiplication-table__notice"><strong>Note:</strong> To make the table more manageable, only the largest {this.props.maxTableLength * this.props.maxTableLength} prime products are shown</p>
-                <div className={ 'multiplication-table__container' + (isScrollableY ? ' is-scrollable-y' : '') } style={{ height, width: outerWidth }}>
-                    <table className="table">
-        				<thead>
-        					<tr>
-                                <th style={tableStyles.tdKey}>
-                                    <div className="multiplication-table__thead__label" />
-                                </th>
-        						{primeIndexes.map((idx) => {
-        							return (
-                                        <th key={ `thead${this.props.primes[idx]}` } style={tableStyles.tdKey}>
-                                            <div className="multiplication-table__thead__label">
+                <div className={ 'multiplication-table__outer-container' + (isScrollableX ? ' is-scrollable-x' : '') } style={{ width }}>
+                    <div className={ 'multiplication-table__container' + (isScrollableY ? ' is-scrollable-y' : '') } style={{ height, width: outerWidth }}>
+                        <table className="table">
+            				<thead style={{ width }}>
+            					<tr style={{ width }}>
+                                    <th className="multiplication-table__thead__label" style={tableStyles.tdKey}></th>
+            						{primeIndexes.map((idx) => {
+            							return (
+                                            <th className="multiplication-table__thead__label" key={ `thead${this.props.primes[idx]}` } style={tableStyles.th}>
                                                 { this.props.primes[idx] }
-                                            </div>
-                                        </th>
-                                    );
-        						})}
-                            </tr>
-        				</thead>
-        				<tbody>
-                            {tableRows}
-        				</tbody>
-                    </table>
+                                            </th>
+                                        );
+            						})}
+                                </tr>
+            				</thead>
+            				<tbody>
+                                {tableRows}
+            				</tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );
