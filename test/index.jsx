@@ -18,7 +18,7 @@ describe('App suite', function() {
         document.getElementById('mainContainer').children.length.should.equal(1);
     });
 
-    it('Defaults to printing multiplication table for the first 10 primes with vertical and horizontal headings', function(done) {
+    it('Defaults to printing multiplication table for the first 10 primes with vertical and horizontal headings', function() {
         // const TestUtils = this.TestUtils;
 
         App.start();
