@@ -1,13 +1,10 @@
 /* global __WEBPACK__ */
 import React from 'react';
-import FixedDataTable from 'fixed-data-table';
 import countTo from '../helpers/number-iterator.js';
 if (__WEBPACK__) {
-    require('../../node_modules/fixed-data-table/dist/fixed-data-table.css');
+    require('../../style/components/MultiplicationTable.less');
 }
 
-const Table  = FixedDataTable.Table;
-const Column = FixedDataTable.Column;
 // Fixed table dimensions
 const dimensions = {
     row: {
@@ -20,6 +17,20 @@ const dimensions = {
         width: 40
     }
 };
+const tableStyles = {
+    th: {
+        width  : `${dimensions.column.width}px`,
+        height : `${dimensions.row.height}px`
+    },
+    td: {
+        width  : `${dimensions.column.width}px`,
+        height : `${dimensions.row.height}px`
+    },
+    tdKey: {
+        width  : `${dimensions.columnKey.width}px`,
+        height : `${dimensions.row.height}px`
+    },
+}
 
 class MultiplicationTable extends React.Component {
     constructor(props) {
@@ -29,58 +40,77 @@ class MultiplicationTable extends React.Component {
     render() {
         // Destructuring to set up tableProps as not including primes and primesLength
         const isAbbreviated = this.props.primesLength > this.props.maxTableLength;
+        let isScrollableX   = false;
+        let isScrollableY   = false;
         const noticeStyle   = {
             display: isAbbreviated ? 'block' : 'none'
         };
         const primeOffset = isAbbreviated ? this.props.primesLength - this.props.maxTableLength : 0;
         const tableLength = this.props.primesLength - primeOffset;
-        let width = dimensions.column.width * tableLength + dimensions.columnKey.width;
+        let outerWidth = dimensions.column.width * tableLength + dimensions.columnKey.width;
+        let width = outerWidth;
         if (width > this.props.maxWidth) {
             width = this.props.maxWidth;
+            isScrollableX = true;
         }
         let height = dimensions.row.height * (tableLength + 1);
         if (height > this.props.maxHeight) {
             height = this.props.maxHeight;
+            isScrollableY = true;
         }
-        const columns = [ ...countTo({ start : primeOffset, length : tableLength }) ].map((primeIdx, idx) => {
-            const prime = this.props.primes[primeIdx];
+        const primeIndexes   = [ ...countTo({ start : primeOffset, length : tableLength }) ];
+        const tableRows      = primeIndexes.map((idxTr) => {
+            const primeTr    = this.props.primes[idxTr];
+            const tableCells = primeIndexes.map((idxTd) => {
+                const primeTd = this.props.primes[idxTd];
+                const key = `td${primeTr}_${primeTd}`;
+                return (
+					<td key={key} style={tableStyles.td}>
+                        {primeTr * primeTd}
+                    </td>
+				);
+            });
+            const trKey = `tr${primeTr}`;
+            const thKey = `th${primeTr}`;
             return (
-                <Column
-                    label={`${prime}`}
-                    width={dimensions.column.width}
-                    dataKey={idx + 1} />
+                <tr key={trKey}>
+					<th key={thKey} style={tableStyles.th}>
+                        <div className="multiplication-table__tbody__label">
+                            {primeTr}
+                        </div>
+                    </th>
+					{tableCells}
+				</tr>
             );
         });
         return (
-            <div>
-                <p style={noticeStyle}><strong>Note:</strong> To make the table more manageable, only the largest 400 prime products are shown</p>
-                <Table
-                    rowHeight={dimensions.row.height}
-                    headerHeight={dimensions.row.height}
-                    rowGetter={this.rowGetter.bind(this)}
-                    rowsCount={tableLength}
-                    width={width}
-                    height={height}>
-                        <Column
-                            label=""
-                            width={dimensions.columnKey.width}
-                            dataKey={0}
-                            fixed={true} />
-                        {columns}
-                </Table>
+            <div className={ 'multiplication-table' + (isAbbreviated ? ' is-abbreviated' : '') + (isScrollableX ? ' is-scrollable-x' : '') } style={{ width }}>
+                <p className="multiplication-table__notice"><strong>Note:</strong> To make the table more manageable, only the largest {this.props.maxTableLength * this.props.maxTableLength} prime products are shown</p>
+                <div className={ 'multiplication-table__container' + (isScrollableY ? ' is-scrollable-y' : '') } style={{ height, width: outerWidth }}>
+                    <table className="table">
+        				<thead>
+        					<tr>
+                                <th style={tableStyles.tdKey}>
+                                    <div className="multiplication-table__thead__label" />
+                                </th>
+        						{primeIndexes.map((idx) => {
+        							return (
+                                        <th key={ `thead${this.props.primes[idx]}` } style={tableStyles.tdKey}>
+                                            <div className="multiplication-table__thead__label">
+                                                { this.props.primes[idx] }
+                                            </div>
+                                        </th>
+                                    );
+        						})}
+                            </tr>
+        				</thead>
+        				<tbody>
+                            {tableRows}
+        				</tbody>
+                    </table>
+                </div>
             </div>
         );
-    }
-
-    rowGetter(rowIndex) {
-        const start  = this.props.primesLength > this.props.maxTableLength ? this.props.primesLength - this.props.maxTableLength : 0;
-        const length = this.props.primesLength - start;
-        let prime1   = this.props.primes[rowIndex + start];
-        let rows     = [ prime1 ];
-        [ ...countTo({ start, length }) ].forEach((idx) => {
-            rows.push(prime1 * this.props.primes[idx]);
-        });
-        return rows;
     }
 }
 
