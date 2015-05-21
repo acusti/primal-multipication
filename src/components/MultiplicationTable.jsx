@@ -41,4 +41,9 @@ class MultiplicationTable extends React.Component {
     }
 }
 
+MultiplicationTable.propTypes = {
+	primesLength: React.PropTypes.number,
+    primes: React.PropTypes.array
+};
+
 export default MultiplicationTable;

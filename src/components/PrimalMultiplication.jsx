@@ -25,13 +25,16 @@ class PrimalMultiplication extends React.Component {
     render() {
         return (
 			<div className="primal-multiplication">
-            	<Parameters onValueChange={this.updateParameters.bind(this)} initialValue={this.props.initialPrimesLength} />
-				<MultiplicationTable primesLength={this.state.primesLength} primes={this.state.primes} />
+                <Parameters onValueChange={this.updateParameters.bind(this)} initialValue={this.props.initialPrimesLength} />
+                <MultiplicationTable primesLength={this.state.primesLength} primes={this.state.primes} />
 			</div>
 		);
 	}
 }
 
+PrimalMultiplication.propTypes = {
+	initialPrimesLength: React.PropTypes.number
+};
 PrimalMultiplication.defaultProps = {
 	initialPrimesLength: 10
 };

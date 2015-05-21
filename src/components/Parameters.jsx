@@ -17,4 +17,8 @@ class Parameters extends React.Component {
     }
 }
 
+Parameters.propTypes = {
+	initialValue: React.PropTypes.number
+};
+
 export default Parameters;
