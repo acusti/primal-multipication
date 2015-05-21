@@ -87,7 +87,7 @@ PrimalMultiplication.propTypes = {
 };
 PrimalMultiplication.defaultProps = {
     initialPrimesLength : 10,
-    maxTableLength      : 20
+    maxTableLength      : 100
 };
 
 export default PrimalMultiplication;
