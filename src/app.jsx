@@ -1,5 +1,7 @@
 // Core JS Array.from polyfill
 import 'core-js/fn/array/from';
+// Symbol polyfill
+import 'core-js/es6/symbol';
 // React
 import React from 'react';
 import ReactRouter from 'react-router';
