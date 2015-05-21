@@ -55,7 +55,6 @@ class MultiplicationTable extends React.Component {
             <div>
                 <p style={noticeStyle}><strong>Note:</strong> To make the table more manageable, only the largest 400 prime products are shown</p>
                 <Table
-                    className="table multiplication-table"
                     rowHeight={dimensions.row.height}
                     headerHeight={dimensions.row.height}
                     rowGetter={this.rowGetter.bind(this)}
