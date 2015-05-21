@@ -20,7 +20,6 @@
   "dependencies": {
     "bootstrap": "^3.3.4",
     "core-js": "^0.9.10",
-    "fixed-data-table": "^0.1.2",
     "raw-loader": "^0.5.1",
     "react": "^0.13.2",
     "react-markdown": "^1.0.1",

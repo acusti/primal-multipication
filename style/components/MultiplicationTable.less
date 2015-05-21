@@ -1,0 +1,33 @@
+@import "../_base.less";
+
+.multiplication-table {
+    position: relative;
+    &.is-scrollable-x {
+        overflow-x: scroll;
+    }
+}
+.multiplication-table__container.is-scrollable-y {
+    overflow-y: scroll;
+}
+.multiplication-table table {
+    table-layout: fixed;
+    width: auto;
+}
+
+.multiplication-table__thead__label {
+    position: absolute;
+    background: white;
+    height: 37px;
+    width: 60px;
+    padding: 10px 23px 0 17px;
+    border-bottom: 2px solid @table-border-color;
+}
+.multiplication-table__thead__label {
+    margin: -27px 0 0 -21px;
+}
+.multiplication-table__notice {
+    display: none;
+    .is-abbreviated & {
+        display: block;
+    }
+}

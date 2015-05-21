@@ -24,12 +24,12 @@ describe('App suite', function() {
         App.start();
 
         // Table tests aren't compatible with fixed-data-table component
-        // const multiplicationTable = document.querySelector('.multiplication-table');
-        // should.exist(multiplicationTable);
-        // multiplicationTable.querySelectorAll('tbody > tr').length.should.equal(10);
-        // multiplicationTable.querySelector('tbody > tr').querySelectorAll('td').length.should.equal(10);
-        // // Check for headings: should have thead, and length should be 11 (includes vertical table headings)
-        // multiplicationTable.querySelectorAll('thead th').length.should.equal(11);
-        // multiplicationTable.querySelector('tbody > tr > :first-child').nodeName.toLowerCase().should.equal('th');
+        const multiplicationTable = document.querySelector('.multiplication-table');
+        should.exist(multiplicationTable);
+        multiplicationTable.querySelectorAll('tbody > tr').length.should.equal(10);
+        multiplicationTable.querySelector('tbody > tr').querySelectorAll('td').length.should.equal(10);
+        // Check for headings: should have thead, and length should be 11 (includes vertical table headings)
+        multiplicationTable.querySelectorAll('thead th').length.should.equal(11);
+        multiplicationTable.querySelector('tbody > tr > :first-child').nodeName.toLowerCase().should.equal('th');
     });
 });
