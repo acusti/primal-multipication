@@ -12,6 +12,7 @@ import App from './app/index.js';
 // User routes
 import routes from './routes.js';
 import basePath from './helpers/base-path.js';
+import analytics from './helpers/analytics.js';
 
 const appInstance = (
     <ReactRouter.Route name="app" path={basePath} handler={App}>
@@ -21,8 +22,12 @@ const appInstance = (
 
 const Bootstrapper = {
     start() {
-        ReactRouter.run(appInstance, ReactRouter.HistoryLocation, function(Handler) {
+        ReactRouter.run(appInstance, ReactRouter.HistoryLocation, function(Handler, state) {
             React.render(<Handler />, document.getElementById('mainContainer'));
+            analytics.addEvent('pageviews', {
+                path   : state.path,
+                action : state.action,
+            });
         });
     },
 };
