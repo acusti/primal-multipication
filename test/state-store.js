@@ -29,7 +29,7 @@ describe('State Store', function() {
 	it('Sets and gets arrays of numbers', function() {
 		const arrayValue = [2, 3, 5, 7, 11, 13, 17, 19, 23];
 		StateStore.setItem('arrayValue', arrayValue);
-		StateStore.getItem('arrayValue').should.deepEqual(arrayValue);
+		StateStore.getItem('arrayValue').should.eql(arrayValue);
 	});
 
 	it('Sets and gets object literals', function() {
@@ -41,14 +41,14 @@ describe('State Store', function() {
 			}
 		};
 		StateStore.setItem('objectValue', objectValue);
-		StateStore.getItem('objectValue').should.deepEqual(objectValue);
+		StateStore.getItem('objectValue').should.eql(objectValue);
 	});
 
 	it('Removes previously set items', function() {
 		StateStore.setItem('item', true);
 		StateStore.getItem('item').should.equal(true);
 		StateStore.removeItem('item');
-		StateStore.getItem('item').should.equal(null);
+		should(StateStore.getItem('item')).equal(null);
 	});
 
 	it('Clears store when clear is called', function() {
@@ -57,7 +57,7 @@ describe('State Store', function() {
 		StateStore.getItem('item').should.equal(true);
 		StateStore.getItem('otherItem').should.be.ok;
 		StateStore.clear();
-		StateStore.getItem('item').should.equal(null);
-		StateStore.getItem('otherItem').should.equal(null);
+		should(StateStore.getItem('item')).equal(null);
+		should(StateStore.getItem('otherItem')).equal(null);
 	});
 });
