@@ -26,6 +26,9 @@
     "superInFunctions": true,
     "templateStrings": true
   },
+  "globals": {
+    "__WEBPACK__": true
+  },
   "rules": {
     "indent": [0, "tab"],
     "func-style": [2, "declaration"],

@@ -1,4 +1,3 @@
-/* global __WEBPACK__ */
 if (__WEBPACK__) {
     require('../style/main.less');
 }
