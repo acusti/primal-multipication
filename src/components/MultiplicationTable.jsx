@@ -1,4 +1,3 @@
-/* global __WEBPACK__ */
 import React from 'react';
 import countTo from '../helpers/number-iterator.js';
 if (__WEBPACK__) {

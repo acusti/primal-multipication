@@ -1,4 +1,3 @@
-/* global __WEBPACK__ */
 import React from 'react';
 import NumberEditor from 'react-number-editor';
 if (__WEBPACK__) {

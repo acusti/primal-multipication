@@ -1,4 +1,3 @@
-/* global __WEBPACK__ */
 import React from 'react';
 import {Route} from 'react-router';
 import ReactMarkdown from 'react-markdown';
