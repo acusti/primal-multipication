@@ -109,8 +109,8 @@ class MultiplicationTable extends React.Component {
                                         );
                                     })}
                                 </tr>
-            				</thead>
-            				<tbody>
+                            </thead>
+                            <tbody style={{ marginTop: tableStyles.th.height }}>
                                 {tableRows}
                             </tbody>
                         </table>
