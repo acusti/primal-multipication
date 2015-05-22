@@ -7,6 +7,7 @@ import App from '../src/app.jsx';
 // Import other tests
 import './number-iterator.js';
 import './find-primes.js';
+import './state-store.js';
 
 describe('App suite', function() {
     it('Renders the main app container', function() {
