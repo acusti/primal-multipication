@@ -2,21 +2,24 @@ import React from 'react';
 import {DefaultRoute} from 'react-router';
 import Chassis from '../../components/Chassis.jsx';
 import PrimalMultiplication from '../../components/PrimalMultiplication.jsx';
+import StateStore from '../../helpers/state-store.js';
 
 class IndexPage extends React.Component {
     constructor() {
         super();
-        // init state
-        this.state = {
-            // your stuff here
-        };
+        // Initialize state
+        this.state = {};
     }
 
     render() {
+        let props = StateStore.getItem('PrimalMultiplication') || {};
+        if (props.primesLength) {
+            props.initialPrimesLength = props.primesLength;
+        }
         return (
             <Chassis>
                 <h1>Multiplication table of prime numbers</h1>
-                <PrimalMultiplication />
+                <PrimalMultiplication { ...props } />
             </Chassis>
         );
     }

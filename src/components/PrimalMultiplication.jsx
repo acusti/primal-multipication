@@ -2,8 +2,10 @@ import React from 'react';
 import Parameters from './Parameters.jsx';
 import MultiplicationTable from './MultiplicationTable.jsx';
 import findPrimes from '../helpers/find-primes.js';
+import StateStore from '../helpers/state-store.js';
 
 let componentOffsetTop;
+
 class PrimalMultiplication extends React.Component {
     constructor(props) {
         super(props);
@@ -40,6 +42,10 @@ class PrimalMultiplication extends React.Component {
                 maxHeight      : this.calculateChildDimensions('height')
             }
 		});
+        StateStore.setItem('PrimalMultiplication', {
+            primesLength,
+            primes
+        });
     }
 
     componentDidMount() {
