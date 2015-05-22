@@ -3,6 +3,7 @@ import Parameters from './Parameters.jsx';
 import MultiplicationTable from './MultiplicationTable.jsx';
 import findPrimes from '../helpers/find-primes.js';
 import StateStore from '../helpers/state-store.js';
+import analytics from '../helpers/analytics.js';
 
 let componentOffsetTop;
 
@@ -32,6 +33,12 @@ class PrimalMultiplication extends React.Component {
             primes = this.state.tableProps.primes;
         } else {
             primes = findPrimes(primesLength);
+            // Track user interaction
+            analytics.addEvent('parameter-updates', {
+                type     : 'primes-length',
+                value    : primesLength,
+                oldValue : this.state.tableProps ? this.state.tableProps.primesLength : '',
+            });
         }
         this.setState({
             tableProps: {

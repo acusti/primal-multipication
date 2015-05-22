@@ -11,6 +11,7 @@ import ReactRouter from 'react-router';
 import App from './app/index.js';
 // User routes
 import routes from './routes.js';
+// Helpers
 import basePath from './helpers/base-path.js';
 import analytics from './helpers/analytics.js';
 
