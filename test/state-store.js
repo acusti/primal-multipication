@@ -20,10 +20,16 @@ describe('State Store', function() {
 		StateStore.getItem('booleanValue').should.equal(false);
 	});
 
-	it('Sets and gets numbers', function() {
+	it('Sets and gets numbers, NaN, and Infinity', function() {
 		const numberValue = -302.505;
 		StateStore.setItem('numberValue', numberValue);
 		StateStore.getItem('numberValue').should.equal(numberValue);
+		const notANumber = NaN;
+		StateStore.setItem('notANumber', notANumber);
+		StateStore.getItem('notANumber').should.be.eql(notANumber);
+		const infiniteNumber = Infinity;
+		StateStore.setItem('infiniteNumber', infiniteNumber);
+		StateStore.getItem('infiniteNumber').should.equal(infiniteNumber);
 	});
 
 	it('Sets and gets arrays of numbers', function() {
