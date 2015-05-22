@@ -1,5 +1,5 @@
-// TODO cache list of primes as they are found
-// let cachedPrimes = [];
+let cachedPrimes = [];
+let cachedComposites = [];
 
 function findPrimes(length, isSingle = false) {
 	let primes = [ ...primeIterator({ length }) ];
@@ -20,6 +20,16 @@ function primeIterator({ length }) {
 			let candidate  = 1;
 			let composites = [];
 
+			function updateCache(prime) {
+				if (count < cachedPrimes.length) {
+					return;
+				}
+				if (prime !== undefined) {
+					cachedPrimes.push(prime);
+				}
+				cachedComposites = composites;
+			}
+
 			return {
 				next : function() {
 					// Are we done?
@@ -29,11 +39,23 @@ function primeIterator({ length }) {
 					let result = {
 						done : false
 					};
+					// Check cache
+					if (cachedPrimes[count] !== undefined) {
+						// If using cache and this is the first time through, set up our composites
+						if (!count) {
+							composites = cachedComposites;
+						}
+						candidate = cachedPrimes[count];
+						result.value = candidate;
+						count++;
+						return result;
+					}
 					// First prime is 2
 					// We never check even numbers, so no need to check its composites
 					if (!count) {
 						result.value = 2;
 						count++;
+						updateCache(result.value);
 						return result;
 					}
 					// Increment over odd numbers
@@ -51,6 +73,7 @@ function primeIterator({ length }) {
 						// Set iterator return value
 						result.value = candidate;
 						count++;
+						updateCache(result.value);
 						return result;
 					}
 					// Current candidate matches another prime composite
