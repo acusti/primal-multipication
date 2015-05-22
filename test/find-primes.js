@@ -1,6 +1,6 @@
 import should from 'turris-test-helpers';
 
-import findPrimes, {isPrime} from '../src/helpers/find-primes.js';
+import findPrimes from '../src/helpers/find-primes.js';
 
 describe('Find primes', function() {
 	it('Returns an array of numbers equal in length to the parameter passed in', function() {
@@ -12,8 +12,28 @@ describe('Find primes', function() {
 		findPrimes(168).should.eql(primes);
 	});
 
+	let bigPrimeTestStart;
+	let bigPrimeTestDuration;
+
 	it('Accepts an optional parameter to request only the nth prime', function() {
-		const bigPrime = findPrimes(100000, true);
-		bigPrime.should.be.a.Number.and.be.exactly(1299709);
+		this.timeout(5000);
+		bigPrimeTestStart = new Date();
+		const bigPrime = findPrimes(199900, true);
+		bigPrime.should.be.a.Number.and.be.exactly(2748439);
+		bigPrimeTestDuration = new Date() - bigPrimeTestStart;
+	});
+
+	it('Caches previous results to speed up subsequent computations', function() {
+		bigPrimeTestStart = new Date();
+		const bigPrime = findPrimes(150000, true);
+		bigPrime.should.be.a.Number.and.be.exactly(2015177);
+		bigPrimeTestDuration.should.be.greaterThan(new Date() - bigPrimeTestStart);
+	});
+
+	it('Accurately uses its cache to restore state and continue calculating primes', function() {
+		bigPrimeTestStart = new Date();
+		const bigPrime = findPrimes(200000, true);
+		bigPrime.should.be.a.Number.and.be.exactly(2750159);
+		bigPrimeTestDuration.should.be.greaterThan(new Date() - bigPrimeTestStart);
 	});
 });
