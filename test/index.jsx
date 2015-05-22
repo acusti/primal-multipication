@@ -20,10 +20,8 @@ describe('App suite', function() {
 
     it('Defaults to printing multiplication table for the first 10 primes with vertical and horizontal headings', function() {
         // const TestUtils = this.TestUtils;
-
         App.start();
 
-        // Table tests aren't compatible with fixed-data-table component
         const multiplicationTable = document.querySelector('.multiplication-table');
         should.exist(multiplicationTable);
         multiplicationTable.querySelectorAll('tbody > tr').length.should.equal(10);

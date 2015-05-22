@@ -98,21 +98,21 @@ class MultiplicationTable extends React.Component {
                 <div className={ 'multiplication-table__outer-container' + (isScrollableX ? ' is-scrollable-x' : '') } style={{ width }}>
                     <div className={ 'multiplication-table__container' + (isScrollableY ? ' is-scrollable-y' : '') } style={{ height, width: outerWidth }}>
                         <table className="table">
-            				<thead style={{ width }}>
-            					<tr style={{ width }}>
+                            <thead style={{ width }}>
+                                <tr style={{ width }}>
                                     <th className="multiplication-table__thead__label" style={tableStyles.tdKey}></th>
-            						{primeIndexes.map((idx) => {
-            							return (
+                                    {primeIndexes.map((idx) => {
+                                        return (
                                             <th className="multiplication-table__thead__label" key={ `thead${this.props.primes[idx]}` } style={tableStyles.th}>
                                                 { this.props.primes[idx] }
                                             </th>
                                         );
-            						})}
+                                    })}
                                 </tr>
             				</thead>
             				<tbody>
                                 {tableRows}
-            				</tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
