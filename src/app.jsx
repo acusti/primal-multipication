@@ -27,7 +27,7 @@ const Bootstrapper = {
             React.render(<Handler />, document.getElementById('mainContainer'));
             analytics.addEvent('pageviews', {
                 path   : state.path,
-                action : state.action,
+                action : state.action || 'pageload'
             });
         });
     },

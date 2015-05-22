@@ -32,7 +32,7 @@
   "rules": {
     "indent": [0, "tab"],
     "func-style": [2, "declaration"],
-    "max-params": [2, 3],
+    "max-params": [2, 4],
     "no-use-before-define": [2, "nofunc"],
     "space-in-brackets": [0],
     "react/jsx-quotes": 1,

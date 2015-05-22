@@ -35,9 +35,9 @@ class PrimalMultiplication extends React.Component {
             primes = findPrimes(primesLength);
             // Track user interaction
             analytics.addEvent('parameter-updates', {
-                type     : 'primes-length',
+                name     : 'primes-length',
                 value    : primesLength,
-                oldValue : this.state.tableProps ? this.state.tableProps.primesLength : '',
+                oldValue : this.state.tableProps ? this.state.tableProps.primesLength : null
             });
         }
         this.setState({
