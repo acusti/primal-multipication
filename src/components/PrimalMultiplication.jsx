@@ -67,7 +67,11 @@ class PrimalMultiplication extends React.Component {
             const container = document.querySelector('.container--primary');
             calculated = container ? container.clientWidth : document.body.clientWidth;
         } else {
-            calculated = window.innerHeight - (componentOffsetTop || 123) - 125;
+            calculated = window.innerHeight - (componentOffsetTop || 123) - 100;
+            // Compensate for note that's shown when primes length exceeds max table length
+            if (this.state.tableProps && this.state.tableProps.primesLength > this.props.maxTableLength) {
+                calculated -= 35;
+            }
         }
         return calculated;
     }
