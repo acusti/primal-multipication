@@ -84,9 +84,10 @@ class PrimalMultiplication extends React.Component {
     }
 
     render() {
+        const isAbbreviated = this.state.primesLength > this.state.tableLength;
         return (
-			<div className="primal-multiplication">
-                <Parameters onValueChange={this.requestParametersUpdate.bind(this)} initialValue={this.props.initialPrimesLength} />
+			<div className={ 'primal-multiplication' + (isAbbreviated ? ' is-abbreviated' : '') }>
+                <Parameters onValueChange={this.requestParametersUpdate.bind(this)} initialPrimesLength={this.props.primesLength} initialtableLength={this.props.tableLength} />
                 <MultiplicationTable {...this.state} />
 			</div>
 		);
