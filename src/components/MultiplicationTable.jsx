@@ -24,7 +24,7 @@ class MultiplicationTable extends React.Component {
     }
 
     render() {
-        const isAbbreviated = this.props.primesLength > this.props.maxTableLength;
+        const isAbbreviated = this.props.primesLength > this.props.tableLength;
         let isScrollableX   = false;
         let isScrollableY   = false;
         let columnWidth     = dimensions.column.widthNarrow;
@@ -54,7 +54,7 @@ class MultiplicationTable extends React.Component {
                 height : `${dimensions.row.height}px`
             },
         };
-        const primeOffset = isAbbreviated ? this.props.primesLength - this.props.maxTableLength : 0;
+        const primeOffset = isAbbreviated ? this.props.primesLength - this.props.tableLength : 0;
         const tableLength = this.props.primesLength - primeOffset;
         // Last columnWidth is for columnKey, which is 10px narrower
         let outerWidth = columnWidth * tableLength + columnWidth - 15;
@@ -121,11 +121,11 @@ class MultiplicationTable extends React.Component {
 }
 
 MultiplicationTable.propTypes = {
-    primes         : React.PropTypes.array,
-    primesLength   : React.PropTypes.number,
-    maxHeight      : React.PropTypes.number,
-    maxWidth       : React.PropTypes.number,
-    maxTableLength : React.PropTypes.number
+    primes       : React.PropTypes.array,
+    primesLength : React.PropTypes.number,
+    maxHeight    : React.PropTypes.number,
+    maxWidth     : React.PropTypes.number,
+    tableLength    : React.PropTypes.number
 };
 
 export default MultiplicationTable;
