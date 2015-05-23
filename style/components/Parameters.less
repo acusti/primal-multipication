@@ -34,11 +34,12 @@
 }
 
 .parameters__table-length {
-    height: 0;
+    max-height: 0;
     overflow: hidden;
-    transition: height 0.4s;
+    transition: max-height 0.7s;
     .is-abbreviated &,
     .is-tableLength-modified & {
-        height: auto;
+        max-height: 3em;
+        transition-duration: 1s;
     }
 }
