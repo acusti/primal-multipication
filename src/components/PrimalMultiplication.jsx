@@ -10,49 +10,43 @@ let componentOffsetTop;
 class PrimalMultiplication extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        // Initialize state from props
+        this.state = props;
     }
 
     componentWillMount() {
-        this.updateParameters(this.props.initialPrimesLength);
+        this.updateParameters('primesLength', this.props.primesLength);
     }
 
-    requestParametersUpdate(primesLength) {
+    requestParametersUpdate(key, newValue) {
         // Debounce updates
         if (this._updateParametersTimeout) {
             window.clearTimeout(this._updateParametersTimeout);
         }
         this._updateParametersTimeout = window.setTimeout(() => {
-            this.updateParameters(primesLength);
+            this.updateParameters(key, newValue);
         }, 50);
     }
 
-    updateParameters(primesLength) {
-        let primes;
-        if (this.state.tableProps && this.state.tableProps.primesLength === primesLength) {
-            primes = this.state.tableProps.primes;
+    updateParameters(key, newValue) {
+        // Clone current state and merge in updated parameter
+        let newState = Object.assign({}, this.state, { [key]: newValue });
+        if (this.state && this.state.primesLength === newState.primesLength) {
+            newState.primes = this.state.primes;
         } else {
-            primes = findPrimes(primesLength);
+            newState.primes = findPrimes(newState.primesLength);
             // Track user interaction
             analytics.addEvent('parameter-updates', {
-                name     : 'primes-length',
-                value    : primesLength,
-                oldValue : this.state.tableProps ? this.state.tableProps.primesLength : null
+                name     : key,
+                value    : newValue,
+                oldValue : this.state ? this.state[key] : null
             });
         }
-        this.setState({
-            tableProps: {
-                primes,
-                primesLength,
-                maxTableLength : this.props.maxTableLength,
-                maxWidth       : this.calculateChildDimensions('width'),
-                maxHeight      : this.calculateChildDimensions('height')
-            }
-		});
-        StateStore.setItem('PrimalMultiplication', {
-            primesLength,
-            primes
-        });
+        this.setState(Object.assign({}, newState, {
+            maxWidth  : this.calculateChildDimensions('width'),
+            maxHeight : this.calculateChildDimensions('height')
+        }));
+        StateStore.setItem('PrimalMultiplication', newState);
     }
 
     componentDidMount() {
@@ -67,10 +61,10 @@ class PrimalMultiplication extends React.Component {
     readComponentDimensions(forceUpdate = false) {
         componentOffsetTop = React.findDOMNode(this).offsetTop;
         if (forceUpdate) {
-            let tableProps       = this.state.tableProps;
-            tableProps.maxWidth  = this.calculateChildDimensions('width');
-            tableProps.maxHeight = this.calculateChildDimensions('height');
-            this.setState({ tableProps });
+            this.setState(Object.assign({}, this.state, {
+                maxWidth  : this.calculateChildDimensions('width'),
+                maxHeight : this.calculateChildDimensions('height')
+            }));
         }
     }
 
@@ -82,30 +76,31 @@ class PrimalMultiplication extends React.Component {
         } else {
             calculated = window.innerHeight - (componentOffsetTop || 123) - 100;
             // Compensate for note that's shown when primes length exceeds max table length
-            if (this.state.tableProps && this.state.tableProps.primesLength > this.props.maxTableLength) {
-                calculated -= 35;
+            if (this.state && this.state.primesLength > this.state.tableLength) {
+                calculated = calculated - 35;
             }
         }
         return calculated;
     }
 
     render() {
+        const isAbbreviated = this.state.primesLength > this.state.tableLength;
         return (
-			<div className="primal-multiplication">
-                <Parameters onValueChange={this.requestParametersUpdate.bind(this)} initialValue={this.props.initialPrimesLength} />
-                <MultiplicationTable {...this.state.tableProps} />
+			<div className={ 'primal-multiplication' + (isAbbreviated ? ' is-abbreviated' : '') }>
+                <Parameters onValueChange={this.requestParametersUpdate.bind(this)} initialPrimesLength={this.props.primesLength} initialtableLength={this.props.tableLength} />
+                <MultiplicationTable {...this.state} />
 			</div>
 		);
 	}
 }
 
 PrimalMultiplication.propTypes = {
-    initialPrimesLength : React.PropTypes.number,
-    maxTableLength      : React.PropTypes.number
+    primesLength : React.PropTypes.number,
+    tableLength    : React.PropTypes.number
 };
 PrimalMultiplication.defaultProps = {
-    initialPrimesLength : 10,
-    maxTableLength      : 100
+    primesLength : 10,
+    tableLength    : 50
 };
 
 export default PrimalMultiplication;

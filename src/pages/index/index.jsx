@@ -12,10 +12,7 @@ class IndexPage extends React.Component {
     }
 
     render() {
-        let props = StateStore.getItem('PrimalMultiplication') || {};
-        if (props.primesLength) {
-            props.initialPrimesLength = props.primesLength;
-        }
+        const props = StateStore.getItem('PrimalMultiplication') || {};
         return (
             <Chassis>
                 <h1>Multiplication table of prime numbers</h1>
