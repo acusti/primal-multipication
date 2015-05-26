@@ -20,6 +20,8 @@ export default class StateStore {
                 value = NaN;
             } else if (value === (codePrefix + 'Infinity')) {
                 value = Infinity;
+            } else if (value === (codePrefix + '-Infinity')) {
+                value = -Infinity;
             }
         }
         return value;
@@ -32,9 +34,10 @@ export default class StateStore {
         // Special handling for NaN and Infi
         if (typeof value === 'number' && isNaN(value)) {
             value = codePrefix + 'NaN';
-        }
-        if (value === Infinity) {
+        } else if (value === Infinity) {
             value = codePrefix + 'Infinity';
+        } else if (value === -Infinity) {
+            value = codePrefix + '-Infinity';
         }
         StateStore._store[key] = JSON.stringify(value);
         if (isLocalStorage) {
