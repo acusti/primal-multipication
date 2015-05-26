@@ -30,6 +30,9 @@ describe('State Store', function() {
 		const infiniteNumber = Infinity;
 		StateStore.setItem('infiniteNumber', infiniteNumber);
 		StateStore.getItem('infiniteNumber').should.equal(infiniteNumber);
+		const negativeInfiniteNumber = -Infinity;
+		StateStore.setItem('negativeInfiniteNumber', negativeInfiniteNumber);
+		StateStore.getItem('negativeInfiniteNumber').should.equal(negativeInfiniteNumber);
 	});
 
 	it('Sets and gets arrays of numbers', function() {
