@@ -69,6 +69,8 @@ class PrimalMultiplication extends React.Component {
     }
 
     calculateChildDimensions(dimension) {
+        // Minimum table heigth is 4 rows (excluding table header)
+        const minHeight = 185;
         let calculated;
         if (dimension === 'width') {
             const container = document.querySelector('.container--primary');
@@ -79,6 +81,9 @@ class PrimalMultiplication extends React.Component {
             if (this.state && this.state.primesLength > this.state.tableLength) {
                 calculated = calculated - 35;
             }
+        }
+        if (calculated < minHeight) {
+            calculated = minHeight;
         }
         return calculated;
     }
