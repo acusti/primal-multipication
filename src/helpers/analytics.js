@@ -1,3 +1,4 @@
+/*eslint camelcase: 0 */
 let Keen;
 if (window && window.Keen) {
     Keen = window.Keen;
@@ -7,7 +8,26 @@ if (window && window.Keen) {
 	Keen.prototype.addEvents = function() {};
 }
 
-const appUrl = window && window.location ? window.location.href : '';
+const app_url = window && window.location ? window.location.href : '';
+const commonEventParams = {
+    app_url,
+    ip_address : '${keen.ip}',
+    user_agent : '${keen.user_agent}',
+    keen       : {
+        addons : [
+            {
+                name   : 'keen:ua_parser',
+                input  : { ua_string : 'user_agent' },
+                output : 'parsed_user_agent'
+            },
+            {
+                name   : 'keen:ip_to_geo',
+                input  : { ip : 'ip_address' },
+                output : 'ip_geo_info'
+            }
+        ],
+    }
+};
 
 const client = new Keen({
 	projectId : '555a93d090e4bd76add99312',
@@ -16,17 +36,13 @@ const client = new Keen({
 
 const analytics = {
     addEvent: function(collection, payload, callback, async) {
-        if (!payload.appUrl) {
-            payload.appUrl = appUrl;
-        }
+        payload = Object.assign(commonEventParams, payload);
         client.addEvent(collection, payload, callback, async);
     },
     addEvents: function(payload, callback) {
         for (let collection in payload) {
             if (payload.hasOwnProperty(collection)) {
-                if (!collection[payload].appUrl) {
-                    collection[payload].appUrl = appUrl;
-                }
+                collection[payload] = Object.assign(commonEventParams, collection[payload]);
             }
         }
         client.addEvents(payload, callback);
