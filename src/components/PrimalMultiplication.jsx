@@ -31,7 +31,7 @@ class PrimalMultiplication extends React.Component {
     updateParameters(key, newValue) {
         // Clone current state and merge in updated parameter
         let newState = Object.assign({}, this.state, { [key]: newValue });
-        if (this.state && this.state.primesLength === newState.primesLength) {
+        if (this.state && this.state.primesLength === newState.primesLength && this.state.primes) {
             newState.primes = this.state.primes;
         } else {
             newState.primes = findPrimes(newState.primesLength);
