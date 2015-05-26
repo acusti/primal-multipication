@@ -9,8 +9,8 @@
 }
 .parameters {
     input {
-        width: 80px;
-        padding: 2px 6px;
+        width: 70px;
+        padding: 2px 4px;
         margin-left: 6px;
         border: 1px solid @gray-lighter;
         &:active {
@@ -20,16 +20,22 @@
     }
 }
 .parameters__help {
-    display: inline-block;
-    vertical-align: top;
-    max-width: 40%;
-    margin-left: 26px;
     font-size: 0.9em;
     color: @gray-light;
 
     .glyphicon {
-        margin-left: -17px;
         font-size: 1.1em;
+    }
+
+    @media (min-width: 767px) {
+        display: inline-block;
+        vertical-align: top;
+        width: 38%;
+        margin-left: 26px;
+
+        .glyphicon {
+            margin-left: -17px;
+        }
     }
 }
 
