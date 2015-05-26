@@ -1,3 +1,4 @@
+/*eslint camelcase: 0 */
 // Array.from polyfill
 import 'core-js/fn/array/from';
 // Object.assign polyfill
@@ -27,7 +28,9 @@ const Bootstrapper = {
             React.render(<Handler />, document.getElementById('mainContainer'));
             analytics.addEvent('pageviews', {
                 path   : state.path,
-                action : state.action || 'pageload'
+                action : state.action || 'pageload',
+                ip_address : '${keen.ip}',
+                user_agent : '${keen.user_agent}'
             });
         });
     },
