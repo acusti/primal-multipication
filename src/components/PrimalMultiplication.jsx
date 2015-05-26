@@ -101,11 +101,11 @@ class PrimalMultiplication extends React.Component {
 
 PrimalMultiplication.propTypes = {
     primesLength : React.PropTypes.number,
-    tableLength    : React.PropTypes.number
+    tableLength  : React.PropTypes.number
 };
 PrimalMultiplication.defaultProps = {
     primesLength : 10,
-    tableLength    : 50
+    tableLength  : 50
 };
 
 export default PrimalMultiplication;

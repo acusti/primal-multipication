@@ -27,8 +27,8 @@ const Bootstrapper = {
         ReactRouter.run(appInstance, ReactRouter.HistoryLocation, function(Handler, state) {
             React.render(<Handler />, document.getElementById('mainContainer'));
             analytics.addEvent('pageviews', {
-                path   : state.path,
-                action : state.action || 'pageload',
+                path       : state.path,
+                action     : state.action || 'pageload',
                 ip_address : '${keen.ip}',
                 user_agent : '${keen.user_agent}'
             });
