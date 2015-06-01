@@ -1,0 +1,21 @@
+@import "../_base.less";
+
+.navbar-nav {
+    .navbar-nav__github-link {
+        padding-left: 3.1em;
+        position: relative;
+        svg {
+            position: absolute;
+            left: 1.1em;
+            margin-top: -2px;
+            width: 1.5em;
+            height: 1.5em;
+        }
+        svg path {
+            fill: @gray;
+        }
+        &:hover svg path {
+            fill: @gray-darker;
+        }
+    }
+}

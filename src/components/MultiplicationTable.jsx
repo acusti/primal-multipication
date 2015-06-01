@@ -124,7 +124,7 @@ MultiplicationTable.propTypes = {
     primesLength : React.PropTypes.number,
     maxHeight    : React.PropTypes.number,
     maxWidth     : React.PropTypes.number,
-    tableLength    : React.PropTypes.number
+    tableLength  : React.PropTypes.number
 };
 
 export default MultiplicationTable;

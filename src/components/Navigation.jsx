@@ -1,7 +1,10 @@
-// react
 import React from 'react';
 import ReactRouter from 'react-router';
 import basePath from '../helpers/base-path.js';
+import IconGithub from './assets/IconGithub.jsx';
+if (__WEBPACK__) {
+    require('../../style/components/Navigation.less');
+}
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -34,6 +37,7 @@ class Navigation extends React.Component {
                         <ul className="nav navbar-nav">
                             <li><ReactRouter.Link to={basePath}>Home</ReactRouter.Link></li>
                             <li><ReactRouter.Link to={`${basePath}about`}>About</ReactRouter.Link></li>
+                            <li><a href="https://github.com/acusti/primal-multiplication" className="navbar-nav__github-link"><IconGithub /> View Source</a></li>
                         </ul>
                     </div>
                 </div>
