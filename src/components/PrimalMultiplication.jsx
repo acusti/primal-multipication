@@ -15,20 +15,20 @@ class PrimalMultiplication extends React.Component {
     }
 
     componentWillMount() {
-        this.updateParameters('primesLength', this.props.primesLength);
+        this._updateParameters('primesLength', this.props.primesLength);
     }
 
-    requestParametersUpdate(key, newValue) {
+    _requestParametersUpdate(key, newValue) {
         // Debounce updates
         if (this._updateParametersTimeout) {
             window.clearTimeout(this._updateParametersTimeout);
         }
         this._updateParametersTimeout = window.setTimeout(() => {
-            this.updateParameters(key, newValue);
+            this._updateParameters(key, newValue);
         }, 50);
     }
 
-    updateParameters(key, newValue) {
+    _updateParameters(key, newValue) {
         // Clone current state and merge in updated parameter
         let newState = Object.assign({}, this.state, { [key]: newValue });
         if (this.state && this.state.primesLength === newState.primesLength && this.state.primes) {
@@ -43,32 +43,32 @@ class PrimalMultiplication extends React.Component {
             });
         }
         this.setState(Object.assign({}, newState, {
-            maxWidth  : this.calculateChildDimensions('width'),
-            maxHeight : this.calculateChildDimensions('height')
+            maxWidth  : this._calculateChildDimensions('width'),
+            maxHeight : this._calculateChildDimensions('height')
         }));
         StateStore.setItem('PrimalMultiplication', newState);
     }
 
     componentDidMount() {
         // Force state update on initial mount
-        this.readComponentDimensions(true);
+        this._readComponentDimensions(true);
     }
 
     componentDidUpdate() {
-        this.readComponentDimensions();
+        this._readComponentDimensions();
     }
 
-    readComponentDimensions(forceUpdate = false) {
+    _readComponentDimensions(forceUpdate = false) {
         componentOffsetTop = React.findDOMNode(this).offsetTop;
         if (forceUpdate) {
             this.setState(Object.assign({}, this.state, {
-                maxWidth  : this.calculateChildDimensions('width'),
-                maxHeight : this.calculateChildDimensions('height')
+                maxWidth  : this._calculateChildDimensions('width'),
+                maxHeight : this._calculateChildDimensions('height')
             }));
         }
     }
 
-    calculateChildDimensions(dimension) {
+    _calculateChildDimensions(dimension) {
         // Minimum table heigth is 4 rows (excluding table header)
         const minHeight = 185;
         let calculated;
@@ -92,7 +92,7 @@ class PrimalMultiplication extends React.Component {
         const isAbbreviated = this.state.primesLength > this.state.tableLength;
         return (
 			<div className={ 'primal-multiplication' + (isAbbreviated ? ' is-abbreviated' : '') }>
-                <Parameters onValueChange={this.requestParametersUpdate.bind(this)} initialPrimesLength={this.props.primesLength} initialtableLength={this.props.tableLength} />
+                <Parameters onValueChange={this._requestParametersUpdate.bind(this)} initialPrimesLength={this.props.primesLength} initialtableLength={this.props.tableLength} />
                 <MultiplicationTable {...this.state} />
 			</div>
 		);
