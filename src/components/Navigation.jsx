@@ -11,7 +11,7 @@ class Navigation extends React.Component {
         };
     }
 
-    toggleCollapse() {
+    _toggleCollapse() {
         const navCollapse = this.state.navCollapse ? '' : 'collapse';
         this.setState({ navCollapse });
     }
@@ -21,7 +21,7 @@ class Navigation extends React.Component {
             <div className="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div className="container">
                     <div className="navbar-header">
-                        <button type="button" className="navbar-toggle" onClick={this.toggleCollapse.bind(this)}>
+                        <button type="button" className="navbar-toggle" onClick={this._toggleCollapse.bind(this)}>
                             <span className="sr-only">Menu</span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>

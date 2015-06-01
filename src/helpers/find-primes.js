@@ -6,10 +6,9 @@ function findPrimes(length, isSingle = false) {
 	return isSingle ? primes[primes.length - 1] : primes;
 }
 
-// Symbol.iterator for generating primes based on 6n +/- 1 factorization
+// Symbol.iterator to generate primes using an incremental functional sieve, as described here:
+// https://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf
 function primeIterator({ length }) {
-	// Use an incremental functional sieve to find primes, as described here:
-	// https://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf
 	if (length === undefined) {
 		length = 10;
 	}

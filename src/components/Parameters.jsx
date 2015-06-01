@@ -9,7 +9,8 @@ class Parameters extends React.Component {
         super(props);
         this.state = { className : '' };
     }
-    onValueChangeFactory(propName) {
+
+    _onValueChangeFactory(propName) {
         return (newValue) => {
             this.props.onValueChange(propName, newValue);
             if (this.state[propName + 'ClassName'] === undefined) {
@@ -31,14 +32,14 @@ class Parameters extends React.Component {
             <div className={componentClassName}>
                 <div className="parameters__primes-length">
                     <label>
-                        How many primes do you want to generate? <NumberEditor key="input[primesLength]" min={1} max={200000} step={1} decimals={0} initialValue={this.props.initialPrimesLength} onValueChange={this.onValueChangeFactory('primesLength')} />
+                        How many primes do you want to generate? <NumberEditor key="input[primesLength]" min={1} max={200000} step={1} decimals={0} initialValue={this.props.initialPrimesLength} onValueChange={this._onValueChangeFactory('primesLength')} />
                     </label>
                     <p className="parameters__help">
                         <span className="glyphicon glyphicon-question-sign"></span> To edit the total: click or tap the number and drag, use keyboard up and down arrows, or double click to enter a new number
                     </p>
                 </div>
                 <p className="parameters__table-length">
-                    <strong>Note:</strong> The table is configured to only show the largest <NumberEditor key="input[tableLength]" min={1} max={100} step={1} decimals={0} initialValue={this.props.initialtableLength} onValueChange={this.onValueChangeFactory('tableLength')} /> primes.
+                    <strong>Note:</strong> The table is configured to only show the largest <NumberEditor key="input[tableLength]" min={1} max={100} step={1} decimals={0} initialValue={this.props.initialtableLength} onValueChange={this._onValueChangeFactory('tableLength')} /> primes.
                 </p>
             </div>
         );
