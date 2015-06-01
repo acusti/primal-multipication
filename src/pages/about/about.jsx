@@ -8,7 +8,7 @@ if (__WEBPACK__) {
     pageContent = require('raw!./about.md');
 }
 
-class OtherPage extends React.Component {
+class AboutPage extends React.Component {
     render() {
         return (
             <Chassis>
@@ -18,6 +18,6 @@ class OtherPage extends React.Component {
     }
 }
 
-const route = React.createElement(Route, {name: 'about', key: 'route_about', handler: OtherPage});
+const route = React.createElement(Route, {name: 'about', key: 'route_about', handler: AboutPage});
 
 export default route;
