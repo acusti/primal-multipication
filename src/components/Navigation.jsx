@@ -2,6 +2,9 @@ import React from 'react';
 import ReactRouter from 'react-router';
 import basePath from '../helpers/base-path.js';
 import IconGithub from './assets/IconGithub.jsx';
+if (__WEBPACK__) {
+    require('../../style/components/Navigation.less');
+}
 
 class Navigation extends React.Component {
     constructor(props) {
